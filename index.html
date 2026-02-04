@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <meta charset="utf-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1" />
+ <title>Similar Flags</title>
+<style>
+   * {font-family: ui-sans-serif, sans-serif}
+   .similar {display: flex; flex-wrap: wrap; margin-bottom: 25px}
+   .flg {margin-right: 0.5em; margin-bottom: 1px}
+
+   .flg > img {height: 40px; border: 3px solid #777} /* TODO: Change for non mobiles */
+   .txt {visibility: hidden; padding: 4px; font-size: 16px}
+/* .flg:hover .txt {visibility: visible;} */
+</style>
+</head>
+<body>
+
+
+<h1>Similar Flags</h1>
+
+<label>
+  <input type="checkbox" id="showNames">Show country names
+</label>
+<br><br>
+
+<script>
+
+const flagGroups = [
+  [
+    {code: 'nz', name: 'New Zealand'},
+    {code: 'au', name: 'Australia'},
+    {code: 'ck', name: 'Cook Islands'},
+    {code: 'ai', name: 'Anguilla'}
+  ],
+  [
+    {code: 'cz', name: 'Czechia'},
+    {code: 'ph', name: 'Philippines'},
+    {code: 'sx', name: 'Sint Maarten'}
+  ],
+  [
+    {code: 'pl', name: 'Poland'},
+    {code: 'mc', name: 'Monaco'},
+    {code: 'id', name: 'Indonesia'},
+    {code: 'sg', name: 'Singapore'},
+    {code: 'mt', name: 'Malta'}
+  ],
+  [
+    {code: 'ru', name: 'Russia'} , // more correct: Russian Federation
+    {code: 'si', name: 'Slovenia'},
+    {code: 'sk', name: 'Slovakia'},
+    {code: 'nl', name: 'Netherlands'},
+    {code: 'lu', name: 'Luxembourg'},
+    {code: 'hr', name: 'Croatia'},
+    {code: 'py', name: 'Paraguay'},
+    {code: 'rs', name: 'Serbia'},
+    {code: 'fr', name: 'France'}
+  ],
+  [
+    {code: 'lr', name: 'Liberia'},
+    {code: 'my', name: 'Malaysia'},
+    {code: 'us', name: 'United States'},
+    {code: 'cl', name: 'Chile'}
+  ],
+  [
+    {code: 'no', name: 'Norway'},
+    {code: 'is', name: 'Iceland'}
+  ],
+  [
+    {code: 'ro', name: 'Romania'},
+    {code: 'td', name: 'Chad'},
+    {code: 'md', name: 'Moldova'}
+  ],
+  [
+    {code: 'co', name: 'Colombia'},
+    {code: 've', name: 'Venezuela'},
+    {code: 'ec', name: 'Ecuador'}
+  ],
+  [
+    {code: 'ye', name: 'Yemen'},
+    {code: 'iq', name: 'Iraq'}
+  ],
+  [
+    {code: 'bh', name: 'Bahrain'},
+    {code: 'qa', name: 'Qatar'}
+  ],
+  [
+    {code: 'in', name: 'India'},
+    {code: 'ne', name: 'Niger'}
+  ],
+  [
+    {code: 'ci', name: "Côte d'Ivoire"},
+    {code: 'ie', name: 'Ireland'}
+  ],
+  [
+    {code: 'ml', name: 'Mali'},
+    {code: 'sn', name: 'Senegal'}
+  ],
+  [
+    {code: 'jo', name: 'Jordan'},
+    {code: 'kw', name: 'Kuwait'},
+    {code: 'ps', name: 'Palestine'},
+    {code: 'sd', name: 'Sudan'},
+    {code: 'ae', name: 'United Arab Emirates'},
+    {code: 'eh', name: 'Western Sahara'}
+  ]
+];
+
+const showNamesCheckbox = document.getElementById('showNames');
+
+flagGroups.forEach(group => {
+  const similarDiv = document.createElement('div');
+  similarDiv.className = 'similar';
+
+  group.forEach(flag => {
+    const flgDiv = document.createElement('div');
+    flgDiv.className = 'flg';
+    flgDiv.style.position = 'relative'; // Needed for absolute txt positioning
+
+    const img = document.createElement('img');
+//  img.src = `country-flags/svg/${flag.code}.svg`; // Use this if https://github.com/hampusborgos/country-flags is cloned into a subdirectory
+    img.src = `https://raw.githubusercontent.com/hampusborgos/country-flags/refs/heads/main/svg/${flag.code}.svg`;
+
+    const txtDiv = document.createElement('div');
+    txtDiv.className = 'txt';
+    txtDiv.textContent = flag.name;
+
+    flgDiv.appendChild(img);
+    flgDiv.appendChild(txtDiv);
+    similarDiv.appendChild(flgDiv);
+  });
+
+  document.body.appendChild(similarDiv);
+});
+
+// Toggle txt visibility based on checkbox
+showNamesCheckbox.addEventListener('change', function() {
+  const txtElements = document.querySelectorAll('.txt');
+  txtElements.forEach(txt => {
+    if (this.checked) {
+      txt.style.visibility = 'visible';
+    } else {
+      txt.style.visibility = 'hidden';
+    }
+  });
+});
+</script>
+
+<hr>
+The source of this page is hosted in <a href='https://github.com/ReneNyffenegger/similar-flags'>this Github repository</a>
+
+</body>
+</html>
